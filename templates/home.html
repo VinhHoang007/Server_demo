@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <title>BK CHATBOT</title>
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/static/logo.png"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      function startTime() {
+        var today = new Date();
+        var hour = checkTime(today.getHours());
+        var min = checkTime(today.getMinutes());
+        var sec = checkTime(today.getSeconds());
+        var day = checkTime(today.getDate());
+        var mon = checkTime(today.getMonth());
+        var year = checkTime(today.getFullYear());
+        document.getElementById('txt').innerHTML =
+        day + "/" + mon + "/" + year + " " + hour + ":" + min + ":" + sec;
+        var t = setTimeout(startTime, 500);
+        function checkTime(i) {
+          if (i < 10) {i = "0" + i}; 
+          return i;
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      h1 {
+        background-color: rgb(255, 214, 101);
+        display: block;
+        font-size: 30pt;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-weight: bolder;
+        padding: 14px 14px;
+        color: rgb(90, 0, 117);
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 3rem;
+      }
+      h3 {
+        color: rgb(143, 0, 0);
+        font-size: 18px;
+        background-color: rgb(255, 226, 189);
+        display: block;
+        padding: 14px 14px;
+      }
+      strong{
+        color:tomato;
+        font-size: 12pt;
+        display: inline-block;
+      }
+      .record_but{
+        padding: 18px 18px;
+        border-radius: 50px;
+        background-color: rgb(255, 40, 83);
+        font-weight: bolder;
+      }
+      #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+        margin-top: 60px;
+      }
+      #textInput {
+        width: 50%;
+        font-family: monospace;
+        font-size: 19px;
+        height: 1cm;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 10px;
+        box-sizing: 15px;
+        border-radius: 5px;
+        background: rgb(255, 226, 189);
+      }
+      .userText {
+        color: white;
+        font-family: Calibri;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        word-break: inherit;
+        text-align: right !important;
+        text-justify: inter-word;
+      }
+      .userText span {
+        background-color: #1000a5;
+        padding: 10px;
+        border-radius: 5px;
+        width: 5cm
+      }
+      .botText {
+        color: rgb(255, 255, 255);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 15px;
+        text-align: left;
+        line-height: 30px;
+        font-weight: bold;
+        outline-style: dashed;
+        outline-width: medium;
+        outline-color: crimson;
+        outline-offset: 0.1cm;
+        background-color: rgb(255, 0, 0);
+        width: 10cm;
+        border-radius: 5px;
+        padding: .5vw .5vw .5vw .5vw;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+        margin-top: 15px;
+        border: 1px solid rgb(38, 34, 255);
+        border-width: thick;
+      }
+      .time{
+        display: inline-block;
+        position: relative;
+        margin-left: 10rem;
+      }
+      #logout{
+        margin-left: 20rem ;
+        background-color: crimson;
+        font-weight: bolder;
+        color: rgb(255, 223, 255);
+      }
+      #Bar{
+        width: 60%;
+      }
+      #myBar {
+        height: 30px;
+        border-radius: 15px;
+        background-color: #bd0000;
+        text-align: center; /* To center it horizontally (if you want) */
+        line-height: 30px; /* To center it vertically */
+        color: rgb(255, 253, 113);
+        font-size: 15pt;
+        font-weight: bolder;
+        margin-bottom: 0px;
+        margin-top: 2px;
+      }
+      .image{
+        margin-top: 0cm;
+        margin-right: 5px;
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+
+  <body onload="startTime()">
+      <h1>
+        <center> The Academic Regulations ChatBot </center>
+      </h1>
+      <h3>
+        <strong> {{ name }} ({{mssv}})</strong> đã đăng nhập vào hệ thống. 
+        <div class="time" id="txt"></div>
+        <a href="/"><button id="logout">Logout</button></a>
+      </h3>
+
+    
+    <div class="boxed">
+      <div>
+        <div id="chatbox">
+          <p class="botText">
+            <span>
+              <img class="image" src="/static/logo.png" alt="HCMUT" style="width:40px;height:40px;"/>
+              Chào bạn {{ name }}, mình có thể giúp gì được cho bạn ? 
+            </span>
+          </p>
+        </div>
+        <div id="tool_chat">
+          <center>
+          <input id="textInput" type="text" name="msg"/>
+          <button class="record_but" id="record_but" onclick="getrecord()">Record</button>
+          </center>
+        </div>      
+        </div>
+    </div>
+
+    
+      <script>
+        function getrecord(){
+          var course_data = '{{course}}';
+          document.getElementById("record_but").disabled = true;
+          $.get("/voicebot",{course:course_data}).done(function(id){
+            var userHtml = '<p class="userText" align="left"><audio controls="controls" type="audio/wav" src=/static/question.wav?u='+id+'></audio></p>';
+            $("#chatbox").append(userHtml);
+            document
+              .getElementById("textInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+            var botHtml = '<img class="image" src="/static/logo.png" alt="HCMUT" style="width:40px;height:40px;"> <audio controls="controls" autoplay="autoplay" src=/static/answer.mp3?u='+id+'></audio></img>';
+            $("#chatbox").append(botHtml);
+            document
+              .getElementById("textInput")
+              .scrollIntoView({block: "start",behavior:"smooth"});
+            $("#Bar").remove();
+            document.getElementById("record_but").disabled = false;
+          });
+          var record_bar = '<center><div id="Bar"><div id="myBar">Listening...</div></div></center>';
+          $("#tool_chat").before(record_bar);
+            var i=0;
+            if (i == 0){
+              i = 1;
+              var elem = document.getElementById("myBar");
+              var width = 10;
+              var id = setInterval(frame, 90);
+            function frame() {
+                if (width >= 100) {
+                  clearInterval(id);
+                  i = 0;
+                } else {
+                  width++;
+                  elem.style.width = width + "%";
+                }
+              }
+           }
+        }
+        function getBotResponse(){
+          var course_data = '{{course}}';
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText" align="left"><span>'+rawText+'</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("textInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/getbot",{msg:rawText, course:course_data}).done(function(data){
+            var answer = JSON.parse(data)
+            var botHtml = '<p class="botText" align="right"><img class="image" src="/static/logo.png" alt="HCMUT" style="width:40px;height:40px;"><span>' + answer.answer + '</span></p>';
+            $("#chatbox").append(botHtml);
+            document
+              .getElementById("textInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>

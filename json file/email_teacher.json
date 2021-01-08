@@ -1,0 +1,43 @@
+{"email_teacher":[
+    {"tag": "INFO",
+    "patterns": ["địa chỉ mail","liên hệ"],
+    "responses": [""]
+    },
+    {"tag": "hhkha",
+    "patterns": ["Hà Kha","Hoàng Kha","viên Hoàng Kha","thầy Hoàng Kha"],
+    "responses": [""]
+    },
+    {"tag": "vtkiet",
+    "patterns": ["Võ Tuấn Kiệt","thầy Tuấn Kiệt"],
+    "responses": [""]
+    },
+    {"tag": "nttuan",
+    "patterns": ["Nguyễn Thanh Tuấn","thầy Thanh Tuấn"],
+    "responses": [""]
+    },
+    {"tag": "dnhanh",
+    "patterns": ["Đặng Ngọc Hạnh","cô Ngọc Hạnh"],
+    "responses": [""]
+    },
+    {"tag": "dqhung",
+    "patterns": ["Đinh Quốc Hùng","Thầy Quốc Hùng"],
+    "responses": [""]
+    },
+    {"tag": "vqson",
+    "patterns": ["Võ Quế Sơn","thầy Quế Sơn"],
+    "responses": [""]
+    },
+    {"tag": "bmvt",
+    "patterns": ["Bộ môn Viễn Thông"],
+    "responses": [""]
+    },
+    {"tag": "dhtuan",
+    "patterns": ["thầy Hồng Tuấn","Đỗ Hồng Tuấn"],
+    "responses": [""]
+    },
+    {"tag": "hvkhuong",
+    "patterns": ["Hồ Văn Khương", "thầy Văn Khương"],
+    "responses": [""]
+    }
+  ]
+}

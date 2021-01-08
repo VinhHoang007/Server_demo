@@ -1,0 +1,18 @@
+{"greet":[
+{"tag": "greeting",
+    "patterns": ["xin chào", "hello", "hi","hey","good morning", "good afternoon", "good day"],
+    "responses": ["Chào bạn ! Mình là Chatbot hỗ trợ học tập ngành Điện tử - Viễn thông ! Mình có thể giúp gì cho bạn ?"],
+    "context": [""]
+   },
+   {"tag": "goodbye",
+    "patterns": ["bye", "see you later","tạm biệt","bái bai"],
+    "responses": ["Tạm biệt bạn, hẹn gặp lại lần sau !"],
+    "context": [""]
+   },
+   {"tag": "thanks",
+    "patterns": ["thanks", "thank you", "cám ơn","ok","hihi"],
+    "responses": ["Nếu có gì thắc mắc, bạn cứ tìm đến Chatbot nhé ! Tớ luôn sẵn sàng để phục vụ cậu !"],
+    "context": [""]
+   }
+]
+}
